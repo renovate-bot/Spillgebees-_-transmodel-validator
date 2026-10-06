@@ -1,4 +1,4 @@
-FROM node:22-slim@sha256:5373f1906319b3a1f291da5d102f4ce5c77ccbe29eb637f072b6c7b70443fc36 AS deps
+FROM node:22-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS deps
 
 RUN corepack enable && corepack prepare pnpm@10.28.2 --activate
 
@@ -11,7 +11,7 @@ COPY packages/web/package.json packages/web/package.json
 
 RUN pnpm install --frozen-lockfile
 
-FROM node:22-slim@sha256:5373f1906319b3a1f291da5d102f4ce5c77ccbe29eb637f072b6c7b70443fc36 AS build
+FROM node:22-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS build
 
 RUN corepack enable && corepack prepare pnpm@10.28.2 --activate
 
@@ -28,7 +28,7 @@ RUN pnpm --filter @transmodel-validator/core build && \
     pnpm --filter @transmodel-validator/cli build && \
     pnpm --filter @transmodel-validator/web build
 
-FROM node:22-slim@sha256:5373f1906319b3a1f291da5d102f4ce5c77ccbe29eb637f072b6c7b70443fc36 AS runtime
+FROM node:22-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS runtime
 
 # Run as non-root user for security
 RUN adduser --disabled-password --gecos "" appuser
