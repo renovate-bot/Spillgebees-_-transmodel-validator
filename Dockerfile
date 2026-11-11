@@ -1,4 +1,4 @@
-FROM node:26-slim@sha256:e4db4c914bf8ad241bd24804fc25d272d89bad97e68cdc8a1414862790a02c39 AS base
+FROM node:26-slim@sha256:e6bedef217677b276c591795e169840edd9096dbf13f29df8ef8d1856b8820bc AS base
 
 # node 25+ no longer bundles corepack; it reads the pnpm version from packageManager in package.json
 # renovate: datasource=npm depName=corepack
@@ -31,7 +31,7 @@ RUN pnpm --filter @transmodel-validator/core build && \
     pnpm --filter @transmodel-validator/cli build && \
     pnpm --filter @transmodel-validator/web build
 
-FROM node:26-slim@sha256:e4db4c914bf8ad241bd24804fc25d272d89bad97e68cdc8a1414862790a02c39 AS runtime
+FROM node:26-slim@sha256:e6bedef217677b276c591795e169840edd9096dbf13f29df8ef8d1856b8820bc AS runtime
 
 # Run as non-root user for security
 RUN adduser --disabled-password --gecos "" appuser
